@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /ek-panel.html
+
+Sitemap: https://emirkepenksistemleri.com/sitemap.xml

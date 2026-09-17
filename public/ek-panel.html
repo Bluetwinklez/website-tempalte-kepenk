@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yönetim Paneli | Emir Kepenk Sistemleri</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #202124;
+            --ink-soft: #3c4043;
+            --muted: #5f6368;
+            --line: #dadce0;
+            --surface: #ffffff;
+            --bg: #f8f9fa;
+            --orange: #ea580c;
+            --orange-dark: #c2410c;
+            --amber: #f59e0b;
+            --sel-bg: #fef3ec;
+        }
+        * { box-sizing: border-box; }
+        body, * { cursor: auto !important; }
+        a, button, [role="button"], input[type=checkbox] { cursor: pointer !important; }
+        body {
+            font-family: 'Plus Jakarta Sans', 'Google Sans', Roboto, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--ink-soft);
+            margin: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+        [hidden] { display: none !important; }
+
+        /* --- Topbar (Firebase-style: white, bottom border) --- */
+        .topbar {
+            background: #fff;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+        }
+        .topbar a.brand { color: var(--ink); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px; font-size: 15px; letter-spacing: 0; }
+        .topbar img { height: 28px; width: auto; border-radius: 6px; }
+        .logout-btn {
+            background: transparent; border: 1px solid var(--line); color: var(--ink-soft);
+            padding: 8px 14px; border-radius: 6px; font-size: 13px; font-family: inherit; font-weight: 600;
+            display: inline-flex; align-items: center; gap: 6px; transition: background .15s;
+        }
+        .logout-btn:hover { background: #f1f3f4; }
+        .logout-btn svg { width: 15px; height: 15px; }
+
+        /* --- Layout --- */
+        .wrap { max-width: 1320px; margin: 0 auto; padding: 28px 24px 80px; }
+        h1 { font-family: 'Outfit', 'Google Sans', sans-serif; font-size: 22px; font-weight: 700; color: var(--ink); margin: 0 0 4px; display: flex; align-items: center; gap: 10px; }
+        .page-sub { color: var(--muted); font-size: 13.5px; margin: 0 0 24px; }
+
+        /* --- Cards --- */
+        .box {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 20px 22px;
+            margin: 0 0 20px;
+            box-shadow: none;
+        }
+
+        /* --- Forms --- */
+        label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; letter-spacing: .01em; }
+        input[type=email], input[type=password], input[type=text] {
+            width: 100%; box-sizing: border-box; padding: 10px 13px; border: 1px solid var(--line); border-radius: 6px;
+            font-size: 14px; margin-bottom: 16px; font-family: inherit; color: var(--ink); background: #fff;
+            transition: border-color .15s, box-shadow .15s;
+        }
+        input:focus { outline: none; border-color: var(--orange); box-shadow: 0 0 0 3px rgba(234,88,12,.12); background: #fff; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--orange);
+            color: #fff; padding: 10px 22px; border: 0; border-radius: 6px; font-weight: 600; font-size: 14px;
+            font-family: inherit; box-shadow: none; transition: background .12s, box-shadow .12s;
+        }
+        .btn:hover { background: var(--orange-dark); box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+        .btn:active { box-shadow: none; }
+        .btn-ghost {
+            background: #fff; color: var(--ink-soft); border: 1px solid var(--line); box-shadow: none;
+        }
+        .btn-ghost:hover { background: #f1f3f4; border-color: #cbd5e1; box-shadow: none; }
+
+        /* --- Preview size toggle --- */
+        .preview-size-toggle { display: flex; gap: 8px; margin-bottom: 12px; }
+        .preview-size-btn {
+            display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid var(--line);
+            border-radius: 6px; padding: 7px 14px; font-family: inherit; font-size: 12.5px; font-weight: 600;
+            color: var(--ink-soft);
+        }
+        .preview-size-btn svg { width: 14px; height: 14px; }
+        .preview-size-btn.active { background: var(--sel-bg); color: var(--orange-dark); border-color: var(--orange); }
+
+        /* --- Login --- */
+        #loginView { display: flex; justify-content: center; padding-top: 4vh; }
+        .login-card { width: 100%; max-width: 400px; text-align: center; }
+        .login-icon {
+            width: 48px; height: 48px; border-radius: 10px; margin: 0 auto 16px;
+            background: var(--orange);
+            display: flex; align-items: center; justify-content: center; box-shadow: none;
+        }
+        .login-icon svg { width: 24px; height: 24px; color: #fff; }
+        .login-card h1 { justify-content: center; }
+        .login-card form { text-align: left; margin-top: 20px; }
+        .login-card .btn { width: 100%; justify-content: center; }
+        #loginError {
+            color: #b91c1c; background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px;
+            padding: 10px 14px; font-size: 13.5px; margin-bottom: 16px; display: none; text-align: left;
+        }
+
+        /* --- Unified dashboard sidebar (Firebase-style: white, tinted selection) --- */
+        .dash-layout { display: flex; gap: 8px; align-items: flex-start; margin-top: 8px; }
+        .dash-sidebar {
+            flex: 0 0 240px; display: flex; flex-direction: column; gap: 1px;
+            position: sticky; top: 65px; background: #fff; border: 1px solid var(--line);
+            border-radius: 8px; padding: 8px;
+        }
+        .dash-nav-label {
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+            color: var(--muted); padding: 14px 14px 6px;
+        }
+        .dash-nav-sep { height: 1px; background: var(--line); margin: 8px 4px; }
+        .dash-nav-btn {
+            display: flex; align-items: center; gap: 12px; text-align: left; width: 100%;
+            background: transparent; border: 0; border-left: 3px solid transparent; border-radius: 0 20px 20px 0; padding: 9px 14px 9px 11px;
+            font-family: inherit; font-size: 13.5px; font-weight: 500; color: var(--ink-soft);
+            transition: background .12s, color .12s;
+        }
+        .dash-nav-btn svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--muted); }
+        .dash-nav-btn:hover { background: #f1f3f4; }
+        .dash-nav-btn.active { background: var(--sel-bg); color: var(--orange-dark); font-weight: 700; border-left-color: var(--orange); }
+        .dash-nav-btn.active svg { color: var(--orange); }
+        .dash-main { flex: 1 1 auto; min-width: 0; }
+        .dash-pane[hidden] { display: none !important; }
+        @media (max-width: 860px) {
+            .dash-layout { flex-direction: column; }
+            .dash-sidebar { position: static; flex-direction: row; flex-wrap: wrap; width: 100%; }
+            .dash-nav-label, .dash-nav-sep { display: none; }
+            .dash-nav-btn { width: auto; }
+        }
+
+        /* --- CMS field sections --- */
+        .cms-section { border: 1px solid var(--line); border-radius: 8px; padding: 18px 20px; margin-bottom: 16px; background: #fff; }
+        .cms-section[hidden] { display: none !important; }
+        .cms-section h2 {
+            font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: var(--ink);
+            margin: 0 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line);
+            display: flex; align-items: center; gap: 8px;
+        }
+        .cms-section h2 svg { width: 16px; height: 16px; color: var(--orange); }
+        .cms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 16px; }
+        .cms-checkbox-field { grid-column: 1 / -1; margin-bottom: 16px; }
+        .cms-checkbox-field label { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; color: var(--ink); cursor: pointer; }
+        .cms-checkbox-field input[type=checkbox] { width: 18px; height: 18px; margin: 0; accent-color: var(--orange); }
+        #contentSaveStatus {
+            font-size: 13.5px; padding: 10px 14px; border-radius: 6px; margin: 0 0 16px; display: none;
+        }
+        #contentSaveStatus.visible { display: block; }
+        #contentSaveStatus.ok { background: #e6f4ea; color: #137333; border: 1px solid #ceead6; }
+        #contentSaveStatus.err { background: #fce8e6; color: #c5221f; border: 1px solid #fad2cf; }
+        #contentSaveStatus.pending { background: #f1f3f4; color: var(--muted); border: 1px solid var(--line); }
+
+        /* --- Lead stats --- */
+        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+        .stat-card {
+            background: #fff; border: 1.5px solid var(--line); border-radius: 8px; padding: 16px 18px;
+            display: flex; flex-direction: column; gap: 2px; text-align: left; font-family: inherit;
+            transition: border-color .12s, background .12s;
+        }
+        .stat-card:hover { border-color: #b0b6bd; }
+        .stat-card.active { border-color: var(--orange); background: var(--sel-bg); }
+        .stat-num { font-family: 'Outfit', sans-serif; font-size: 26px; font-weight: 700; color: var(--ink); }
+        .stat-label { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+        .stat-card.stat-new .stat-num { color: #b06000; }
+        .stat-card.stat-done .stat-num { color: #137333; }
+        @media (max-width: 560px) { .stats-row { grid-template-columns: 1fr; } }
+
+        /* --- Leads toolbar --- */
+        .leads-toolbar { display: flex; gap: 10px; align-items: center; margin-bottom: 16px; }
+        .leads-toolbar input[type=text] { margin-bottom: 0; flex: 1 1 auto; max-width: 360px; }
+        .leads-toolbar .btn { padding: 9px 16px; font-size: 13px; white-space: nowrap; }
+
+        /* --- Leads table --- */
+        table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+        th, td { border-bottom: 1px solid var(--line); padding: 11px 12px; text-align: left; vertical-align: top; }
+        th { background: #f8f9fa; font-weight: 700; color: var(--ink); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+        tbody tr:hover { background: #f8f9fa; }
+        tr.handled { opacity: .5; }
+        .pill { display: inline-block; padding: 3px 11px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
+        .pill-new { background: #feefc3; color: #986a00; }
+        .pill-done { background: #e6f4ea; color: #137333; }
+        .wa-link { color: #137333; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+        .wa-link:hover { text-decoration: underline; }
+        .del-lead-btn { margin-top: 6px; background: none; border: 0; color: #c5221f; font-size: 11.5px; font-weight: 700; font-family: inherit; padding: 0; }
+        .del-lead-btn:hover { text-decoration: underline; }
+        .empty-hint { color: var(--muted); font-size: 14px; padding: 32px 0; text-align: center; }
+        .table-scroll { overflow-x: auto; }
+
+        /* --- Image upload grid --- */
+        .images-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+        .image-card { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: #fff; position: relative; }
+        .image-card .image-thumb-wrap { position: relative; aspect-ratio: 4/3; background: #e5e7eb; cursor: pointer; overflow: hidden; }
+        .image-card .image-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .image-card .image-thumb-overlay {
+            position: absolute; inset: 0; background: rgba(15,23,42,.55); color: #fff; display: flex;
+            align-items: center; justify-content: center; gap: 6px; font-size: 12px; font-weight: 700;
+            opacity: 0; transition: opacity .15s;
+        }
+        .image-card .image-thumb-wrap:hover .image-thumb-overlay { opacity: 1; }
+        .image-card .image-thumb-overlay svg { width: 16px; height: 16px; }
+        .image-card .image-label { font-size: 12px; font-weight: 700; color: var(--ink-soft); padding: 8px 10px; }
+        .image-card .image-status { font-size: 11px; padding: 0 10px 8px; color: var(--muted); }
+        .image-card.uploading .image-thumb-wrap { opacity: .5; }
+        .image-card input[type=file] { display: none; }
+
+        /* --- Quick links --- */
+        .links-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+        .links-list a {
+            display: flex; align-items: center; justify-content: space-between; gap: 8px;
+            padding: 16px 18px; background: #fff; border: 1px solid var(--line); border-radius: 8px;
+            text-decoration: none; color: var(--ink); font-weight: 600; font-size: 14px; transition: background .12s, border-color .12s;
+        }
+        .links-list a:hover { border-color: var(--orange); background: var(--sel-bg); }
+        .links-list a svg.arrow { width: 15px; height: 15px; color: var(--orange); flex-shrink: 0; }
+
+        @media (max-width: 640px) {
+            .wrap { padding: 20px 14px 60px; }
+            .box { padding: 16px 16px; }
+            .cms-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a class="brand" href="/"><img src="images/logo-emblem.png" alt="Emir Kepenk Sistemleri"> Emir Kepenk Sistemleri</a>
+        <button type="button" id="logoutBtn" class="logout-btn" hidden><i data-lucide="log-out"></i> Çıkış Yap</button>
+    </div>
+
+    <div class="wrap">
+        <!-- GİRİŞ -->
+        <div id="loginView">
+            <div class="login-card">
+                <div class="login-icon"><i data-lucide="shield-check"></i></div>
+                <h1 style="justify-content:center">Yönetim Paneli</h1>
+                <p class="page-sub">Devam etmek için giriş yapın</p>
+                <div class="box">
+                    <p id="loginError"></p>
+                    <form data-login-form>
+                        <label for="loginEmail">E-posta</label>
+                        <input type="email" id="loginEmail" autocomplete="username" required>
+                        <label for="loginPassword">Şifre</label>
+                        <input type="password" id="loginPassword" autocomplete="current-password" required>
+                        <button type="submit" class="btn"><i data-lucide="log-in"></i> Giriş Yap</button>
+                    </form>
+                    <p style="margin-top:16px"><a href="#" id="forgotPasswordLink" style="font-size:13px;color:var(--muted)">Şifremi unuttum</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL -->
+        <div id="dashboardView" hidden>
+            <h1><i data-lucide="layout-dashboard" style="color:var(--orange)"></i> Yönetim Paneli</h1>
+            <p class="page-sub">Emir Kepenk Sistemleri — talepler, site içeriği ve hızlı erişim.</p>
+
+            <div class="dash-layout">
+                <div class="dash-sidebar" id="dashNav">
+                    <button type="button" class="dash-nav-btn active" data-pane="leads"><i data-lucide="inbox"></i> Gelen Talepler</button>
+                    <div class="dash-nav-label">Site İçeriği</div>
+                    <div id="cmsSectionNav"></div>
+                    <div class="dash-nav-sep"></div>
+                    <div class="dash-nav-label">Medya</div>
+                    <button type="button" class="dash-nav-btn" data-pane="images"><i data-lucide="image"></i> Görseller</button>
+                    <div class="dash-nav-sep"></div>
+                    <button type="button" class="dash-nav-btn" data-pane="links"><i data-lucide="link"></i> Hızlı Bağlantılar</button>
+                </div>
+
+                <div class="dash-main">
+                    <div id="pane-leads" class="dash-pane">
+                        <div class="stats-row">
+                            <button type="button" class="stat-card active" data-lead-filter="all"><span class="stat-num" id="statTotal">0</span><span class="stat-label">Toplam Talep</span></button>
+                            <button type="button" class="stat-card stat-new" data-lead-filter="new"><span class="stat-num" id="statNew">0</span><span class="stat-label">Yeni</span></button>
+                            <button type="button" class="stat-card stat-done" data-lead-filter="done"><span class="stat-num" id="statHandled">0</span><span class="stat-label">İşlendi</span></button>
+                        </div>
+                        <div class="box">
+                            <div class="leads-toolbar">
+                                <input type="text" id="leadsSearch" placeholder="Ada, telefona, ilçeye veya hizmete göre ara…">
+                                <button type="button" id="exportLeadsBtn" class="btn btn-ghost"><i data-lucide="download"></i> CSV İndir</button>
+                            </div>
+                            <div class="table-scroll">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Tarih</th><th>Ad Soyad</th><th>Telefon</th><th>İlçe</th><th>Hizmet</th><th>Not</th><th>Durum</th><th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="leadsTableBody"></tbody>
+                                </table>
+                                <p id="leadsEmptyHint" class="empty-hint" hidden>Henüz gelen talep yok.</p>
+                                <p id="leadsNoMatchHint" class="empty-hint" hidden>Aramayla eşleşen talep yok.</p>
+                                <p id="leadsLoadingHint" class="empty-hint">Yükleniyor…</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="pane-content" class="dash-pane" hidden>
+                        <div class="box">
+                            <button type="button" id="togglePreviewBtn" class="btn btn-ghost" style="width:100%;justify-content:center">
+                                <i data-lucide="eye"></i> Canlı Önizlemeyi Göster
+                            </button>
+                            <p style="font-size:12.5px;color:var(--muted);margin:10px 0 0">
+                                Önizlemede metinlere doğrudan tıklayıp yazabilirsin — aynı düzenleme sistemi, sadece burada.
+                            </p>
+                            <div id="previewWrap" hidden style="margin-top:14px">
+                                <div class="preview-size-toggle">
+                                    <button type="button" class="preview-size-btn active" data-preview-size="desktop"><i data-lucide="monitor"></i> Masaüstü</button>
+                                    <button type="button" class="preview-size-btn" data-preview-size="mobile"><i data-lucide="smartphone"></i> Mobil</button>
+                                </div>
+                                <div id="previewFrameWrap" style="border:1.5px solid var(--line);border-radius:14px;overflow:hidden;background:#e5e7eb;padding:14px;display:flex;justify-content:center">
+                                    <iframe id="previewFrame" src="about:blank" style="width:100%;height:70vh;border:0;display:block;background:#fff;border-radius:4px;transition:width .2s"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box">
+                            <p id="contentSaveStatus"></p>
+                            <form data-content-form>
+                                <div id="cmsFieldsContainer"></div>
+                                <button type="submit" class="btn" style="margin-top:16px"><i data-lucide="save"></i> Kaydet</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="pane-images" class="dash-pane" hidden>
+                        <div class="box">
+                            <p style="font-size:12.5px;color:var(--muted);margin:0 0 16px">
+                                Bir görsele tıklayıp yeni bir dosya seç — otomatik yüklenir ve sitede birkaç saniye içinde görünür. (Maks. 5 MB, sadece resim dosyaları)
+                            </p>
+                            <p id="imagesSaveStatus" style="display:none"></p>
+                            <div id="imageFieldsContainer" class="images-grid"></div>
+                        </div>
+                    </div>
+
+                    <div id="pane-links" class="dash-pane" hidden>
+                        <div class="links-list">
+                    <a href="https://ads.google.com" target="_blank" rel="noopener">Google Ads <i data-lucide="arrow-up-right" class="arrow"></i></a>
+                    <a href="https://business.facebook.com" target="_blank" rel="noopener">Meta Business Suite <i data-lucide="arrow-up-right" class="arrow"></i></a>
+                    <a href="https://search.google.com/search-console" target="_blank" rel="noopener">Google Search Console <i data-lucide="arrow-up-right" class="arrow"></i></a>
+                    <a href="https://analytics.google.com" target="_blank" rel="noopener">Google Analytics 4 <i data-lucide="arrow-up-right" class="arrow"></i></a>
+                    <a href="https://console.firebase.google.com/project/gen-lang-client-0256784982" target="_blank" rel="noopener">Firebase Console <i data-lucide="arrow-up-right" class="arrow"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@1.39.0/dist/umd/lucide.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-storage-compat.js"></script>
+    <script src="js/firebase-config.js?v=20260916a"></script>
+    <script src="js/admin.js?v=20260917k"></script>
+</body>
+</html>

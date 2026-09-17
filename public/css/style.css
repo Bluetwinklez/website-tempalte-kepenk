@@ -1,0 +1,578 @@
+/* Emir Kepenk - Profesyonel Geçiş Animasyonları ve Özel Stiller */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700;1,800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap');
+
+:root {
+    --brand-orange: #EA580C;
+    --brand-amber: #F97316;
+    --brand-dark: #0F172A;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.font-display {
+    font-family: 'Montserrat', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.02em;
+}
+
+/* 🌟 SCROLL REVEAL GEÇİŞ ANİMASYONLARI */
+.reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+.reveal-left.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: opacity, transform;
+}
+.reveal-scale.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Kademeli Gecikmeler (Stagger) */
+.delay-75  { transition-delay: 75ms; }
+.delay-100 { transition-delay: 100ms; }
+.delay-150 { transition-delay: 150ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-250 { transition-delay: 250ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* 🌟 KARTLAR & CAM EFEKTLERİ */
+.clean-glass {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+.clean-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.clean-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 35px -10px rgba(234, 88, 12, 0.12), 0 10px 15px -3px rgba(15, 23, 42, 0.04);
+    border-color: #FDBA74;
+}
+
+/* Işıltı (Shimmer/Sweep) Efekti */
+.clean-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-25deg);
+    transition: left 0.75s ease;
+    pointer-events: none;
+}
+.clean-card:hover::after {
+    left: 140%;
+}
+
+/* 🌟 RESİM GEÇİŞ EFEKTLERİ */
+.project-card img {
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+.project-card:hover img {
+    transform: scale(1.08);
+}
+
+/* 🌟 BUTON & ROZET ANİMASYONLARI */
+@keyframes float-soft {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+}
+.float-badge {
+    animation: float-soft 3.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.45);
+    }
+    50% {
+        box-shadow: 0 0 0 14px rgba(234, 88, 12, 0);
+    }
+}
+.pulse-emergency {
+    animation: pulse-glow 2s infinite;
+}
+
+/* 🌟 PARILTILI BUTON ANİMASYONU (SHIMMER SWEEP) */
+@keyframes btn-shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+.shimmer-btn {
+    background: linear-gradient(
+        110deg,
+        #ea580c 0%,
+        #f97316 25%,
+        #fbbf24 50%,
+        #f97316 75%,
+        #ea580c 100%
+    );
+    background-size: 200% auto;
+    animation: btn-shimmer 4s linear infinite;
+}
+.shimmer-btn:hover {
+    animation-duration: 2s;
+}
+
+/* 🌟 RADAR DALGA ANİMASYONU */
+@keyframes radar-ring {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2.4); opacity: 0; }
+}
+.radar-wave {
+    position: relative;
+}
+.radar-wave::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    border: 2px solid #22c55e;
+    animation: radar-ring 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+    pointer-events: none;
+}
+
+/* 🌟 LIGHTBOX MODAL ANİMASYONU */
+@keyframes modal-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.94) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+.modal-animate {
+    animation: modal-fade-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 🌟 İNTERAKTİF KEPENK SİMÜLATÖRÜ & AKILLI KUMANDA STİLLERİ */
+.shutter-stage {
+    position: relative;
+    width: 100%;
+    height: 290px;
+    background: radial-gradient(circle at center 40%, #1e293b 0%, #090d16 100%);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 0 20px 30px -10px rgba(0,0,0,0.5);
+}
+
+.shutter-interior {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: filter 0.5s ease;
+}
+
+.shutter-spotlight {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140%;
+    height: 100%;
+    background: radial-gradient(ellipse at 50% 0%, rgba(255, 200, 100, 0.35) 0%, rgba(255, 160, 50, 0.1) 45%, transparent 70%);
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+.shutter-spotlight.off {
+    opacity: 0.05;
+}
+
+.shutter-curtain {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    transition: height 2.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.9);
+    z-index: 10;
+    overflow: hidden;
+}
+
+.shutter-slats {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+}
+
+.slats-antrasit {
+    background: repeating-linear-gradient(
+        to bottom,
+        #1e293b 0px,
+        #334155 8px,
+        #475569 16px,
+        #1e293b 22px,
+        #0f172a 24px
+    );
+    border-bottom: 6px solid #0f172a;
+}
+
+.slats-sari {
+    background: linear-gradient(
+        to bottom,
+        #1e293b 0%,
+        #334155 35%,
+        #f59e0b 38%,
+        #fbbf24 60%,
+        #d97706 63%,
+        #1e293b 65%,
+        #0f172a 100%
+    );
+    background-size: 100% 100%;
+    border-bottom: 6px solid #b45309;
+}
+.slats-sari::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.3) 0px,
+        transparent 6px,
+        rgba(0,0,0,0.3) 12px
+    );
+}
+
+.slats-ahsap {
+    background: repeating-linear-gradient(
+        to bottom,
+        #78350f 0px,
+        #92400e 6px,
+        #b45309 14px,
+        #78350f 20px,
+        #451a03 24px
+    );
+    border-bottom: 6px solid #451a03;
+}
+
+.slats-beyaz {
+    background: repeating-linear-gradient(
+        to bottom,
+        #cbd5e1 0px,
+        #f1f5f9 8px,
+        #e2e8f0 16px,
+        #94a3b8 22px,
+        #64748b 24px
+    );
+    border-bottom: 6px solid #475569;
+}
+
+.shutter-bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 18px;
+    background: linear-gradient(to bottom, #0f172a, #020617);
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 4px solid #f97316;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.shutter-bottom-bar::after {
+    content: '';
+    width: 60px;
+    height: 3px;
+    background: #f97316;
+    border-radius: 2px;
+}
+
+.remote-btn {
+    background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.remote-btn:hover {
+    border-color: #f97316;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(249, 115, 22, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.remote-btn:active {
+    transform: translateY(1px) scale(0.97);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.led-glow-green {
+    box-shadow: 0 0 12px #22c55e, 0 0 4px #22c55e;
+}
+.led-glow-red {
+    box-shadow: 0 0 12px #ef4444, 0 0 4px #ef4444;
+}
+.led-glow-amber {
+    box-shadow: 0 0 12px #f59e0b, 0 0 4px #f59e0b;
+}
+
+/* 🌟 4️⃣ 3D MANYETİK TİLT KART EFEKTİ (3D TILT HOVER) */
+.tilt-card {
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+    will-change: transform;
+}
+
+.tilt-inner {
+    transform: translateZ(20px);
+}
+/* 🌟 ✨ SADECE ÖZEL ANİMASYONLU İMLEÇ NOKTASI (CUSTOM CURSOR DOT ONLY) */
+#customCursorDot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 9px;
+    height: 9px;
+    background: linear-gradient(135deg, #ea580c, #f97316);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(234, 88, 12, 0.85), 0 0 3px #ffffff;
+    transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1), height 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, box-shadow 0.2s ease, opacity 0.25s ease;
+    opacity: 0;
+    will-change: transform;
+}
+
+#customCursorDot.active {
+    opacity: 1;
+}
+
+#customCursorDot.hover-link {
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    box-shadow: 0 0 18px rgba(245, 158, 11, 0.95), 0 0 4px #ffffff;
+}
+
+#customCursorDot.clicking {
+    transform: translate(-50%, -50%) scale(0.6);
+    background: #c2410c;
+}
+
+/* Standart Windows/Tarayıcı Fare İmlecini Gizle (Sadece Parlayan Özel Nokta Görünsün) */
+@media (hover: hover) and (pointer: fine) {
+    *, body, a, button, input, select, textarea, label, [role="button"] {
+        cursor: none !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    #customCursorDot {
+        display: none !important;
+    }
+}
+/* Mobil Dokunmatik & iOS Safe-Area İyileştirmeleri */
+.mobile-safe-bottom {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    a, button, input, select, textarea {
+        -webkit-tap-highlight-color: rgba(234, 88, 12, 0.15);
+        touch-action: manipulation;
+    }
+}
+
+/* Özel Scrollbar */
+::-webkit-scrollbar {
+    width: 9px;
+}
+::-webkit-scrollbar-track {
+    background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #EA580C;
+}
+
+/* 🌟 🔝 AKILLI "YUKARI ÇIK" (BACK TO TOP) BUTONU */
+#backToTopContainer {
+    transition: bottom 0.3s ease;
+}
+
+#backToTopBtn {
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.25s ease, 
+                border-color 0.25s ease,
+                background-color 0.25s ease;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.12), 0 2px 6px -1px rgba(15, 23, 42, 0.08);
+}
+
+#backToTopBtn.visible {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateY(0) scale(1) !important;
+}
+
+#backToTopBtn:hover {
+    box-shadow: 0 10px 25px -3px rgba(234, 88, 12, 0.28), 0 4px 10px -2px rgba(15, 23, 42, 0.08);
+    border-color: rgba(234, 88, 12, 0.5);
+}
+
+#backToTopProgress {
+    transition: stroke-dashoffset 0.12s linear;
+}
+
+/* Mobil Uyum & Safe Area: Mobil barın hemen üstünde durur */
+@media (max-width: 1024px) {
+    #backToTopContainer {
+        bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)) !important;
+    }
+}
+
+/* Telefon Giriş Formatı (Input Mask) İnce Ayarları */
+#formPhone {
+    letter-spacing: 0.03em;
+    font-variant-numeric: tabular-nums;
+}
+#formPhone:focus {
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.15);
+}
+#formPhone.is-valid {
+    border-color: #10b981 !important;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2) !important;
+}
+#formPhone.is-invalid {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
+}
+
+/* 🌟 GALERİ IZGARASI (HER SIRAYA 4 KART DÜZENİ) */
+@media (min-width: 1024px) {
+    #projectsContainer {
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+        gap: 1.5rem !important;
+    }
+}
+.project-card .project-card-img-wrap {
+    height: 220px !important;
+}
+
+/* 🌟 MARKA LOGO ROZETİ (ÖLÇÜ KİLİTLEME - ASLA PATLAMAZ / TAŞMAZ) */
+.brand-logo-badge {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    min-height: 48px !important;
+    max-width: 48px !important;
+    max-height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    border-radius: 1rem !important;
+    flex-shrink: 0 !important;
+}
+.brand-logo-badge img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    display: block !important;
+}
+@media (min-width: 640px) {
+    .brand-logo-badge {
+        width: 52px !important;
+        height: 52px !important;
+        min-width: 52px !important;
+        min-height: 52px !important;
+        max-width: 52px !important;
+        max-height: 52px !important;
+    }
+}
+
+/* 🌟 HIZLI HİZMET ETİKETLERİ & SEÇİM ANİMASYONU */
+.service-chip {
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.service-chip:hover {
+    transform: translateY(-1px);
+}
+.service-chip.active {
+    background-color: #EA580C !important;
+    color: #ffffff !important;
+    border-color: #C2410C !important;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.28) !important;
+    transform: scale(1.03);
+}
+.service-chip.active .chip-icon {
+    color: #ffffff !important;
+}
+.service-input-highlight {
+    border-color: #EA580C !important;
+    box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.25) !important;
+    background-color: #FFF7ED !important;
+    transition: all 0.25s ease;
+}
+
+

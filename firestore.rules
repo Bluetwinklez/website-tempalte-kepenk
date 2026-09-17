@@ -1,0 +1,27 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /leads/{leadId} {
+      allow create: if request.resource.data.keys().hasOnly(['name', 'phone', 'district', 'service', 'message', 'handled', 'createdAt'])
+                    && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 200
+                    && request.resource.data.phone is string && request.resource.data.phone.size() > 0 && request.resource.data.phone.size() <= 50
+                    && request.resource.data.district is string && request.resource.data.district.size() <= 200
+                    && request.resource.data.service is string && request.resource.data.service.size() <= 300
+                    && request.resource.data.message is string && request.resource.data.message.size() <= 2000
+                    && request.resource.data.handled == false;
+      allow read, update, delete: if request.auth != null
+                    && request.auth.uid == 'MZw1ENzRMre49h9UckT7uIiD9LG2';
+    }
+
+    match /content/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null
+                    && request.auth.uid == 'MZw1ENzRMre49h9UckT7uIiD9LG2';
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
