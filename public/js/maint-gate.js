@@ -40,7 +40,12 @@
     if (localStorage.getItem('ek_admin_bypass') === '1') { reveal(); return; }
   } catch (e) { /* localStorage kapalıysa normal akışa devam */ }
 
-  var url = 'https://firestore.googleapis.com/v1/projects/gen-lang-client-0256784982/databases/(default)/documents/content/site?key=AIzaSyD9gRsPfh2EcrBcYQPojvJJ3V8RbgaVeL4';
+  var cfg = window.firebaseConfig || {};
+  if (!cfg.projectId || cfg.projectId === 'YOUR_PROJECT_ID' || !cfg.apiKey || cfg.apiKey === 'YOUR_FIREBASE_API_KEY') {
+    reveal();
+    return;
+  }
+  var url = 'https://firestore.googleapis.com/v1/projects/' + cfg.projectId + '/databases/(default)/documents/content/site?key=' + cfg.apiKey;
   var settled = false;
   var timer = setTimeout(function () {
     if (settled) return;

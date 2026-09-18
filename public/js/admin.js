@@ -3,8 +3,6 @@
 (function () {
   'use strict';
 
-  var ADMIN_UID = 'MZw1ENzRMre49h9UckT7uIiD9LG2';
-
   // Panele yeni bir düzenlenebilir alan eklemek için:
   // 1) index.html'de ilgili öğeye data-cms="anahtar" ekle
   // 2) Aşağıdaki FIELD_SECTIONS listesine [anahtar, etiket] satırı ekle
@@ -20,8 +18,8 @@
       ['themeColorAmber', 'İkincil marka rengi (amber)', '#F97316', 'color']
     ]},
     { title: 'İletişim', icon: 'phone', fields: [
-      ['phoneDisplay', 'Telefon (görünen, Örn: 0553 688 19 76)', '0553 688 19 76'],
-      ['phoneDigits', 'Telefon (link için, sadece rakam, Örn: 905536881976)', '905536881976']
+      ['phoneDisplay', 'Telefon (görünen, Örn: 0555 000 00 00)', '0555 000 00 00'],
+      ['phoneDigits', 'Telefon (link için, sadece rakam, Örn: 905550000000)', '905550000000']
     ]},
     { title: 'Ana Başlık (Hero)', icon: 'heading', fields: [
       ['heroTitleLine1', 'Başlık 1. satır', 'İşletmeniz ve Garajınız İçin'],
@@ -205,7 +203,7 @@
   }
 
   auth.onAuthStateChanged(function (user) {
-    if (user && user.uid === ADMIN_UID) {
+    if (user) {
       try { localStorage.setItem('ek_admin_bypass', '1'); } catch (e) {}
       loginView.hidden = true;
       dashboardView.hidden = false;
@@ -214,7 +212,6 @@
       loadContent();
     } else {
       try { localStorage.removeItem('ek_admin_bypass'); } catch (e) {}
-      if (user) auth.signOut();
       loginView.hidden = false;
       dashboardView.hidden = true;
       logoutBtn.hidden = true;

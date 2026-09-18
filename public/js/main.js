@@ -4,7 +4,7 @@
 // (telefon + WhatsApp tıklamaları tek dönüşüm işlemi altında toplanıyor)
 
 function getPhoneDigits() {
-    return (window.SITE_CONTENT && window.SITE_CONTENT.phoneDigits) || '905536881976';
+    return (window.SITE_CONTENT && window.SITE_CONTENT.phoneDigits) || '905550000000';
 }
 
 document.addEventListener('DOMContentLoaded', () => {

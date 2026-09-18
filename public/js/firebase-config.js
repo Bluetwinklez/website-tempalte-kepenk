@@ -1,9 +1,9 @@
-// Firebase proje yapılandırması (public — Firestore güvenlik kurallarıyla korunur)
+// Firebase proje yapılandırması (Şablon — Kendi Firebase proje bilgilerinizi buraya giriniz)
 window.firebaseConfig = {
-  apiKey: "AIzaSyD9gRsPfh2EcrBcYQPojvJJ3V8RbgaVeL4",
-  authDomain: "gen-lang-client-0256784982.firebaseapp.com",
-  projectId: "gen-lang-client-0256784982",
-  storageBucket: "gen-lang-client-0256784982.firebasestorage.app",
-  messagingSenderId: "868587090262",
-  appId: "1:868587090262:web:6bb559096a6d0ce880a6f7"
+  apiKey: "YOUR_FIREBASE_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.firebasestorage.app",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };

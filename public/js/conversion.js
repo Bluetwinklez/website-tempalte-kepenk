@@ -1,10 +1,10 @@
-// Google Ads Dönüşüm Takibi: telefon ve WhatsApp tıklamaları
+// Google Ads Dönüşüm Takibi: telefon ve WhatsApp tıklamaları (Şablon)
 (function () {
-  var CONVERSION_ID = 'AW-18417608316/ZQQTCPaB9uwcEPzMmc5E';
+  var CONVERSION_ID = 'AW-XXXXXXXXXX/XXXXXXXXXXXX'; // Kendi Google Ads dönüşüm etiketiniz
   var fired = false;
 
   function sendConversion(type) {
-    if (fired || typeof gtag !== 'function') return;
+    if (fired || typeof gtag !== 'function' || CONVERSION_ID.indexOf('XXXX') !== -1) return;
     fired = true;
     gtag('event', 'conversion', {
       'send_to': CONVERSION_ID,

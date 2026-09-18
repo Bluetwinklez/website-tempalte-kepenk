@@ -3,8 +3,8 @@
 (function () {
   'use strict';
 
-  var DEFAULT_PHONE_DIGITS = '905536881976';
-  var ADMIN_UID = 'MZw1ENzRMre49h9UckT7uIiD9LG2';
+  var DEFAULT_PHONE_DIGITS = '905550000000';
+  var DEFAULT_PHONE_DISPLAY = '0555 000 00 00';
 
   window.SITE_CONTENT = { phoneDigits: DEFAULT_PHONE_DIGITS };
 
@@ -50,7 +50,7 @@
     showMaintenanceOverlay(msg);
     if (typeof firebase.auth !== 'function') return;
     firebase.auth().onAuthStateChanged(function (user) {
-      if (user && user.uid === ADMIN_UID) hideMaintenanceOverlay();
+      if (user) hideMaintenanceOverlay();
       else showMaintenanceOverlay(msg);
     });
   }
@@ -112,16 +112,16 @@
     if (!phoneDigits || phoneDigits === DEFAULT_PHONE_DIGITS) return;
     window.SITE_CONTENT.phoneDigits = phoneDigits;
 
-    // Görünen metin: "0553 688 19 76" geçen düz metin düğümlerini değiştir
+    // Görünen metin: varsayılan numara geçen düz metin düğümlerini değiştir
     if (phoneDisplay) {
       var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
       var node;
       var targets = [];
       while ((node = walker.nextNode())) {
-        if (node.nodeValue.indexOf('0553 688 19 76') !== -1) targets.push(node);
+        if (node.nodeValue.indexOf(DEFAULT_PHONE_DISPLAY) !== -1) targets.push(node);
       }
       targets.forEach(function (n) {
-        n.nodeValue = n.nodeValue.split('0553 688 19 76').join(phoneDisplay);
+        n.nodeValue = n.nodeValue.split(DEFAULT_PHONE_DISPLAY).join(phoneDisplay);
       });
     }
 

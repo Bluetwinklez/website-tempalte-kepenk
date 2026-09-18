@@ -69,8 +69,8 @@ Tailwind CSS ve Vanilla JavaScript ile hafif ve hızlı olarak geliştirilmiş, 
 
 ### 1. Projeyi Klonlayın
 ```bash
-git clone https://github.com/Bluetwinklez/emir-kepenk-sistemleri.git
-cd emir-kepenk-sistemleri
+git clone https://github.com/KULLANICI_ADI/kepenk-web-template.git
+cd kepenk-web-template
 ```
 
 ### 2. Firebase Projenizi Hazırlayın

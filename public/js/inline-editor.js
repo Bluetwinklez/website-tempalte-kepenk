@@ -4,12 +4,10 @@
 (function () {
   'use strict';
 
-  var ADMIN_UID = 'MZw1ENzRMre49h9UckT7uIiD9LG2';
-
   function boot() {
     if (typeof firebase === 'undefined' || !firebase.apps.length) return;
     firebase.auth().onAuthStateChanged(function (user) {
-      if (user && user.uid === ADMIN_UID) enableEditMode();
+      if (user) enableEditMode();
     });
   }
 
