@@ -57,7 +57,7 @@
       ['list11', 'Madde 12', 'Mağaza & Vitrin Kepenkleri']
     ]},
     { title: 'Ekstra Metinler', icon: 'type', fields: [
-      ['trustBadge', 'Üst rozet yazısı', 'Emir Kepenk • 15+ Yıllık İmalatçı Güvencesi'],
+      ['trustBadge', 'Üst rozet yazısı', 'Kepenk Sistemleri • 15+ Yıllık İmalatçı Güvencesi'],
       ['heroCtaText', 'Ana teklif butonu yazısı', 'Hemen Teklif Al'],
       ['statLabel1', 'Sayaç 1 etiketi', 'Montaj & Teslimat'],
       ['statMiddleValue', 'Sayaç 2 değeri', 'Aynı Gün'],
@@ -68,7 +68,7 @@
       ['reviewsCount', 'Yorum sayısı yazısı', '240+ Gerçek Müşteri Değerlendirmesi']
     ]},
     { title: 'Müşteri Yorumları (3 Kart)', icon: 'star', fields: [
-      ['testi1Quote', 'Yorum 1 — Metin', "\"Gece saat 23:00'da kuyumcu dükkanımızın kepengi yarıda sıkıştı ve kapanmadı. Emir Kepenk'i aradık, 25 dakikada gelip motor dişlisini değiştirdiler. Harika esnaflık ve dürüst fiyat!\""],
+      ['testi1Quote', 'Yorum 1 — Metin', "\"Gece saat 23:00'da kuyumcu dükkanımızın kepengi yarıda sıkıştı ve kapanmadı. Kepenk servisini aradık, 25 dakikada gelip motor dişlisini değiştirdiler. Harika esnaflık ve dürüst fiyat!\""],
       ['testi1Name', 'Yorum 1 — İsim', 'Murat K.'],
       ['testi1Role', 'Yorum 1 — Ünvan', 'Kuyumcu İşletmecisi'],
       ['testi2Quote', 'Yorum 2 — Metin', '"Yeni açtığımız eczane için poliüretanlı antrasit kepenk yaptırdık. Ölçüyü lazerle aldılar, tam söz verdikleri gün getirip 3 saatte tertemiz taktılar. Motor sesi neredeyse hiç duyulmuyor."'],
@@ -376,7 +376,7 @@
       var lead = item.data;
       var tr = document.createElement('tr');
       if (lead.handled) tr.className = 'handled';
-      var waText = encodeURIComponent('Merhaba ' + (lead.name || '') + ', Emir Kepenk Sistemleri olarak talebiniz için size dönüyoruz.');
+      var waText = encodeURIComponent('Merhaba ' + (lead.name || '') + ', kepenk ve servis talebiniz için size dönüyoruz.');
       var phoneDigits = (lead.phone || '').replace(/\D/g, '');
       tr.innerHTML =
         '<td>' + formatDate(lead.createdAt) + '</td>' +

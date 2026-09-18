@@ -1,5 +1,5 @@
 #!/bin/bash
-# Tek komutla: Firebase Hosting'e deploy et + GitHub'daki emir-kepenk-sistemleri reposuna senkronize et.
+# Tek komutla: Firebase Hosting'e deploy et + GitHub reposuna senkronize et.
 # Kullanım: ./deploy.sh "commit mesajı (opsiyonel)"
 set -e
 
@@ -28,4 +28,4 @@ else
   git push origin main
 fi
 
-echo "Tamamlandı: https://emirkepenksistemleri.com  |  https://github.com/Bluetwinklez/emir-kepenk-sistemleri"
+echo "Tamamlandı: https://github.com/Bluetwinklez/emir-kepenk-sistemleri"

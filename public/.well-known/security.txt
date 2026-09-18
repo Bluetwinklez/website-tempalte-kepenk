@@ -1,6 +1,6 @@
-Contact: tel:+905536881976
-Contact: https://wa.me/905536881976
+Contact: tel:+905550000000
+Contact: https://wa.me/905550000000
 Expires: 2027-12-31T23:59:59.000Z
 Preferred-Languages: tr, en
-Canonical: https://emirkepenksistemleri.com/.well-known/security.txt
-Policy: https://emirkepenksistemleri.com/
+Canonical: https://example.com/.well-known/security.txt
+Policy: https://example.com/

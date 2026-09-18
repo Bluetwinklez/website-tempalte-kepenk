@@ -1,4 +1,4 @@
-// Emir Kepenk Sistemleri - Ana JavaScript & Geçiş Animasyonları
+// Kepenk & Otomasyon Sistemleri - Ana JavaScript & Geçiş Animasyonları
 
 // Dönüşüm takibi js/conversion.js dosyasına taşındı
 // (telefon + WhatsApp tıklamaları tek dönüşüm işlemi altında toplanıyor)
@@ -83,22 +83,22 @@ const faultData = {
     sikisma: {
         title: "Kepenk Sıkıştı / Yarıda Kaldı",
         reason: "Askı yayı kırılması, ray içi kirlilik/deformasyon veya emniyet freninin devreye girmesi.",
-        waText: "Merhaba Emir Kepenk, kepengim yarıda sıkıştı ve hareket etmiyor. Acil servis için konum göndermek istiyorum."
+        waText: "Merhaba, kepengim yarıda sıkıştı ve hareket etmiyor. Acil servis için konum göndermek istiyorum."
     },
     motor: {
         title: "Motor Ses Yapıyor / Sarmıyor",
         reason: "Motor termik sigortası atması, redüktör dişli aşınması veya kondansatör/fren bobini yanması.",
-        waText: "Merhaba Emir Kepenk, kepenk motorundan ses geliyor ama sarmıyor. Acil motor servisi talep ediyorum."
+        waText: "Merhaba, kepenk motorundan ses geliyor ama sarmıyor. Acil motor servisi talep ediyorum."
     },
     kumanda: {
         title: "Kumanda / Alıcı Kart Arızası",
         reason: "Alıcı kart trafo yanması, elektrik dalgalanması veya kumanda rolling-code frekans kaybı.",
-        waText: "Merhaba Emir Kepenk, kepenk kumandam basmıyor ve elektrik gelmiyor. Arıza servisi rica ediyorum."
+        waText: "Merhaba, kepenk kumandam basmıyor ve elektrik gelmiyor. Arıza servisi rica ediyorum."
     },
     yay: {
         title: "Yay Koptu / Palet Raydan Çıktı",
         reason: "Mekanik aşırı yük, paslanma, fırtına darbesi veya yay ömrünün tükenmesi.",
-        waText: "Merhaba Emir Kepenk, kepenk yayım koptu ve paletler raydan çıktı. Acil tamir ustası yönlendirir misiniz?"
+        waText: "Merhaba, kepenk yayım koptu ve paletler raydan çıktı. Acil tamir ustası yönlendirir misiniz?"
     }
 };
 
@@ -148,7 +148,7 @@ function openLightbox(imgSrc, title, desc) {
     document.getElementById('lightboxImg').src = imgSrc;
     document.getElementById('lightboxTitle').textContent = title;
     document.getElementById('lightboxDesc').textContent = desc;
-    document.getElementById('lightboxWhatsAppBtn').href = `https://wa.me/${getPhoneDigits()}?text=${encodeURIComponent('Merhaba Emir Kepenk Sistemleri, sitenizdeki ' + title + ' modeli için fiyat ve detaylı bilgi almak istiyorum.')}`;
+    document.getElementById('lightboxWhatsAppBtn').href = `https://wa.me/${getPhoneDigits()}?text=${encodeURIComponent('Merhaba, sitenizdeki ' + title + ' modeli için fiyat ve detaylı bilgi almak istiyorum.')}`;
 
     modal.classList.remove('hidden');
     if (modalBox) {
@@ -340,7 +340,7 @@ function handleFormSubmit(e) {
     }
 
     const waMsg = encodeURIComponent(
-        `*Emir Kepenk - Yeni Fiyat & Servis Talebi:*\n` +
+        `*Kepenk Sistemleri - Yeni Fiyat & Servis Talebi:*\n` +
         `👤 *Ad Soyad / Firma:* ${name}\n` +
         `📞 *Telefon:* ${phone}\n` +
         `📍 *İlçe / Mahalle:* ${district || 'Belirtilmedi'}\n` +

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /ek-panel
 Disallow: /ek-panel.html
 
-Sitemap: https://emirkepenksistemleri.com/sitemap.xml
+Sitemap: https://example.com/sitemap.xml
