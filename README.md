@@ -18,6 +18,16 @@ Emir Kepenk Sistemleri için kurumsal tanıtım sitesi ve Firebase tabanlı yön
 
 ## Dağıtım (Deploy)
 
+Bu repo, çalışma kopyasının (`.../claude/site`) bir aynasıdır. Değişiklikler orada
+yapılır; `deploy.sh` çalıştırıldığında hem Firebase Hosting'e yayınlanır hem de
+bu repoya otomatik commit + push edilir:
+
+```bash
+./deploy.sh "commit mesajı"
+```
+
+Sadece hosting'i yayınlamak için:
+
 ```bash
 firebase deploy --only hosting --project gen-lang-client-0256784982
 ```
