@@ -6,8 +6,14 @@
 
   function boot() {
     if (typeof firebase === 'undefined' || !firebase.apps.length) return;
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) enableEditMode();
+    var generation = 0;
+    var enabled = false;
+    firebase.auth().onAuthStateChanged(async function (user) {
+      var current = ++generation;
+      var permitted = await window.adminAccess.isAdministrator(user);
+      if (current !== generation) return;
+      if (permitted && !enabled) { enabled = true; enableEditMode(); }
+      else if (!permitted && enabled) window.location.reload();
     });
   }
 

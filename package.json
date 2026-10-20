@@ -1,0 +1,21 @@
+{
+  "name": "kepenkpro-template",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.cjs",
+    "check": "node --check public/js/admin.js && node --check public/js/inline-editor.js && node --check public/js/admin-access.js && node --check scripts/grant-admin.cjs",
+    "admin:grant": "node scripts/grant-admin.cjs",
+    "test:rules": "firebase emulators:exec --project demo-kepenkpro --only firestore,storage \"node --test tests/authorization.rules.mjs\""
+  },
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^6.0.0",
+    "firebase": "^13.0.0",
+    "firebase-admin": "^14.5.0",
+    "firebase-tools": "^15.34.0"
+  }
+}

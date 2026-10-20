@@ -202,8 +202,12 @@
     loginError.style.display = 'block';
   }
 
-  auth.onAuthStateChanged(function (user) {
-    if (user) {
+  var authGeneration = 0;
+  auth.onAuthStateChanged(async function (user) {
+    var generation = ++authGeneration;
+    var permitted = await window.adminAccess.isAdministrator(user);
+    if (generation !== authGeneration) return;
+    if (permitted) {
       try { localStorage.setItem('ek_admin_bypass', '1'); } catch (e) {}
       loginView.hidden = true;
       dashboardView.hidden = false;
@@ -211,6 +215,7 @@
       loadLeads();
       loadContent();
     } else {
+      if (user) showError('This account does not have administrator access.');
       try { localStorage.removeItem('ek_admin_bypass'); } catch (e) {}
       loginView.hidden = false;
       dashboardView.hidden = true;

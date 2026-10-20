@@ -1,125 +1,68 @@
-# 🛡️ KepenkPro — Modern Kepenk & Otomasyon Web Sitesi + Firebase Yönetim Paneli Şablonu
+# KepenkPro — Service Website and Firebase Admin Template
 
-Modern, yüksek performanslı ve tam donanımlı kurumsal **Kepenk, Garaj Kapısı ve Otomasyon Sistemleri Web Sitesi ve Yönetim Paneli Şablonu** (Website Template & Admin Panel).
+A responsive roller-shutter, garage-door and automation service website with lead collection, editable content, an image gallery and a Firebase administration panel. Built with HTML, Tailwind CSS and vanilla JavaScript, backed by Firebase Authentication, Firestore and Storage.
 
-Tailwind CSS ve Vanilla JavaScript ile hafif ve hızlı olarak geliştirilmiş, arka planda Firebase Authentication, Cloud Firestore ve Firebase Storage ile güçlendirilmiştir.
+## Repository layout
 
----
+| Path | Purpose |
+|---|---|
+| `public/index.html` | Public website and enquiry forms |
+| `public/ek-panel.html` | Administration panel |
+| `public/js/firebase-config.js` | Public Firebase project configuration |
+| `public/js/admin-access.js` | Shared strict administrator-claim check |
+| `public/js/inline-editor.js` | Administrator-only content editing |
+| `firestore.rules`, `storage.rules` | Server-enforced authorization |
+| `firebase.json` | Hosting, rules and HTTP security headers |
 
-## 🌟 Öne Çıkan Özellikler
+The sample business content is Turkish and can be customized in HTML and through the CMS. Replace the brand, phone/WhatsApp details, service areas, images, domain, sitemap and policy templates before using it for a business.
 
-### 🎯 1. Ziyaretçi Odaklı Modern Web Sitesi (`public/index.html`)
-- **Modern & Akıcı Arayüz:** Tailwind CSS, mikro animasyonlar, Lucide ikon seti ve modern tipografi.
-- **Hızlı Dönüşüm Öğeleri:**
-  - 7/24 Acil Kepenk Arızası ve Servis Talep Modalı.
-  - Önceden yapılandırılmış dinamik WhatsApp mesaj butonları (ilçe ve arıza tipine göre).
-  - Canlı sayaç istatistikleri ve güven rozetleri.
-- **İnteraktif Galeri & Lightbox:** Yapılan işleri filtreleme ve yüksek çözünürlüklü modal ile inceleme.
-- **Hizmet & İlçe Rehberleri:** Bölge bazlı arıza ve servis alanları kartları.
-- **Müşteri Yorumları & SSS:** Akordeon formatında sıkça sorulan sorular ve doğrulanmış müşteri değerlendirmeleri.
-- **Mobil & iOS Odaklı Deneyim:** iOS Safe-Area uyumlu, altta sabit hızlı arama ve WhatsApp iletişim çubuğu.
-- **SEO & Performans:** WebP görsel formatları, Schema.org JSON-LD yapısal verisi, Open Graph ve Twitter kartları.
-
-### 🔐 2. Firebase Yönetim Paneli (`public/ek-panel.html`)
-- **Güvenli Kimlik Doğrulama:** Firebase Auth (Email/Password) ile korunan yönetici girişi.
-- **Gelen Talepler (Leads) Yönetimi:** Sitedeki formlardan gelen fiyat teklifleri ve arıza kayıtlarını listeleme, durum güncelleme ve tek tıkla WhatsApp'tan müşteriye dönüş yapma.
-- **Dinamik İçerik Yönetimi (CMS):** Kod değiştirmeden sitedeki başlıkları, alt başlıkları, güven rozetlerini, istatistikleri ve müşteri yorumlarını Firestore üzerinden güncelleme.
-- **Görsel Yükleme (Storage):** Galeriye ve siteye yeni fotoğraflar yükleme.
-- **Bakım Modu (Maintenance Gate):** Tek tıkla siteyi bakım moduna alma veya yayına açma.
-
-### ✏️ 3. Canlı Yerinde Düzenleme (Inline Editor - `public/js/inline-editor.js`)
-- Yönetici paneline giriş yaptıktan sonra ana siteyi ziyaret ettiğinizde, düzenlenebilir alanların üzerinde beliren kalem butonuna tıklayarak metinleri canlı olarak yerinde düzenleyip Firestore'a kaydedebilirsiniz.
-
----
-
-## 📁 Proje Dizin Yapısı
+## Local setup
 
 ```bash
-├── public/
-│   ├── index.html              # Ana web sitesi
-│   ├── ek-panel.html           # Firebase tabanlı yönetim paneli
-│   ├── 404.html                # Özel 404 hata sayfası
-│   ├── kvkk.html               # KVKK aydınlatma metni şablonu
-│   ├── gizlilik.html           # Gizlilik ve çerez politikası şablonu
-│   ├── robots.txt              # Arama motoru direktifleri
-│   ├── sitemap.xml             # Site haritası
-│   ├── site.webmanifest        # PWA / mobil web uygulama bildirimi
-│   ├── css/
-│   │   └── style.css           # Özel animasyonlar ve stil tanımları
-│   ├── js/
-│   │   ├── firebase-config.js  # Firebase istemci yapılandırması
-│   │   ├── site-content.js     # Firestore'dan içerik/tema eşleme
-│   │   ├── inline-editor.js    # Canlı yerinde tıkla-düzenle motoru
-│   │   ├── maint-gate.js       # Bakım modu kontrolü
-│   │   ├── admin.js            # Yönetim paneli mantığı
-│   │   ├── main.js             # Slider, modallar, filtreleme, sayaçlar
-│   │   ├── handlers.js         # Etkinlik ve form dinleyicileri
-│   │   ├── consent.js          # Çerez izin banner'ı
-│   │   └── conversion.js       # Dönüşüm ve analitik izleme
-│   └── images/                 # Optimize edilmiş WebP ve SVG görseller
-├── firestore.rules             # Cloud Firestore yetkilendirme kuralları
-├── storage.rules               # Cloud Storage yetkilendirme kuralları
-├── firebase.json               # Firebase Hosting & HTTP Güvenlik başlıkları (CSP, HSTS)
-└── README.md                   # Proje dokümantasyonu
+git clone https://github.com/Bluetwinklez/website-tempalte-kepenk.git
+cd website-tempalte-kepenk
+npm install
+npm run check
+npm test
 ```
 
----
+Use Node 22 or newer. Create a Firebase project, enable Email/Password Authentication, create Firestore and Storage, and copy your web application's public configuration into `public/js/firebase-config.js`. Firebase web configuration identifies a project; the deployed security rules protect its data.
 
-## 🚀 Hızlı Başlangıç & Kurulum
+## Administrator provisioning
 
-### 1. Projeyi Klonlayın
+**Signing in alone does not grant administration rights.** Firestore writes, private lead access and Storage uploads require a Firebase custom claim with the boolean value `admin: true`. Both the panel and inline editor check the same claim. Ordinary authenticated users are denied.
+
+Create your administrator in Firebase Authentication, then grant the claim from a trusted machine using the Admin SDK. Use Application Default Credentials authorized for the intended Firebase project; keep service-account credentials outside this repository:
+
 ```bash
-git clone https://github.com/KULLANICI_ADI/kepenk-web-template.git
-cd kepenk-web-template
+npm run admin:grant -- YOUR_FIREBASE_PROJECT_ID YOUR_ADMIN_USER_UID
 ```
 
-### 2. Firebase Projenizi Hazırlayın
-1. [Firebase Console](https://console.firebase.google.com/) adresine gidin ve yeni bir proje oluşturun.
-2. Sol menüden **Authentication** sekmesine girip **Email/Password** sağlayıcısını aktif edin ve yönetici kullanıcınızı oluşturun.
-3. **Cloud Firestore** veritabanı oluşturun.
-4. **Cloud Storage** deposu oluşturun.
-5. Proje Ayarları (Project Settings) > Genel (General) sekmesinden yeni bir **Web Uygulaması** ekleyin ve verilen konfigürasyon nesnesini kopyalayın.
+Sign out and back in after granting or changing claims. The script preserves other existing claims. Never let a browser, public form, or ordinary user assign this claim.
 
-### 3. Yapılandırma Bilgilerini Güncelleyin
-`public/js/firebase-config.js` dosyasını açarak kendi Firebase bilgilerinizi girin:
+## Deployment
 
-```javascript
-window.firebaseConfig = {
-  apiKey: "FIREBASE_API_KEY",
-  authDomain: "PROJE_ID.firebaseapp.com",
-  projectId: "PROJE_ID",
-  storageBucket: "PROJE_ID.firebasestorage.app",
-  messagingSenderId: "SENDER_ID",
-  appId: "APP_ID"
-};
-```
+Install the Firebase CLI, sign in, select your project, and deploy the rules together with hosting:
 
-### 4. Şablonu Kendi İşletmenize Göre Özelleştirin
-- **Marka & Başlıklar:** `public/index.html` ve `public/ek-panel.html` içerisindeki marka adını kendi logonuzla değiştirin.
-- **İletişim & WhatsApp Numarası:** `public/index.html` ve `public/js/main.js` içerisindeki telefon ve WhatsApp bağlantılarını güncelleyin.
-- **İçerik:** İster doğrudan HTML üzerinden isterseniz yönetim panelinden Firestore CMS ile dilediğiniz gibi güncelleyin.
-
-### 5. Dağıtım (Firebase Hosting)
-Firebase CLI yüklü değilse yükleyin:
 ```bash
 npm install -g firebase-tools
 firebase login
-```
-
-Güvenlik kurallarını ve web sitesini yayınlayın:
-```bash
+firebase use --add
+firebase emulators:start --only hosting
 firebase deploy --only firestore:rules,storage,hosting
 ```
 
----
+Publishing code to GitHub does not deploy your Firebase project. Deploying only hosting leaves old server rules active. This repository does not include production credentials.
 
-## 🔒 Güvenlik
+## Data access
 
-- **Firestore Rules:** Sadece kimliği doğrulanmış yöneticiler içerik ve ayarları güncelleyebilir; ziyaretçiler yalnızca form talebi oluşturabilir.
-- **Storage Rules:** Yalnızca giriş yapan yöneticiler görsel yükleyebilir.
-- **HTTP Güvenlik Başlıkları:** `firebase.json` içerisinde önceden tanımlanmış Content-Security-Policy (CSP), Strict-Transport-Security (HSTS), X-Frame-Options ve X-Content-Type-Options başlıkları yer alır.
+- Public visitors may read public content and submit a size-validated lead with `handled: false` and a server timestamp.
+- Only administrators may read, update or delete leads, change content, or upload permitted images.
+- Unknown document paths are denied. Public image reads support the gallery.
+- Client-side visibility is convenience; the server rules enforce authorization.
 
----
+Enquiry rules do not provide spam rate limiting. Add deployment-specific abuse controls when operating a public production form. Replace the sample privacy/cookie notices with accurate business-specific notices.
 
-## 📄 Lisans
-Bu proje [MIT Lisansı](LICENSE) kapsamında açık kaynak ve serbest kullanıma uygundur. Dilediğiniz gibi geliştirebilir, kişisel veya ticari projelerinizde kullanabilirsiniz.
+## Validation
+
+`npm run check` checks administration scripts; `npm test` verifies claim handling for anonymous users, ordinary users, malformed claims, token failures and administrators. `npm run test:rules` starts isolated Firestore/Storage emulators under the demo project and tests server authorization, forged lead fields, timestamp validation, public reads, image restrictions and administrator deletion. It requires Java 21 and downloads emulator binaries on first use. CI runs all three checks. [Previous detailed template guide (Turkish)](README.tr.md). [MIT license](LICENSE).
