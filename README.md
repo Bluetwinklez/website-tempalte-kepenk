@@ -63,6 +63,10 @@ Publishing code to GitHub does not deploy your Firebase project. Deploying only 
 
 Enquiry rules do not provide spam rate limiting. Add deployment-specific abuse controls when operating a public production form. Replace the sample privacy/cookie notices with accurate business-specific notices.
 
+## Dependency status
+
+The Node toolchain is development-only. A scoped override updates the Firestore client’s vulnerable gRPC dependency. Some Firebase CLI transitive advisories remain upstream; see [the dependency review](docs/DEPENDENCY_REVIEW.md) for exact scope, audit commands and limitations.
+
 ## Validation
 
 `npm run check` checks administration scripts; `npm test` verifies claim handling for anonymous users, ordinary users, malformed claims, token failures and administrators. `npm run test:rules` starts isolated Firestore/Storage emulators under the demo project and tests server authorization, forged lead fields, timestamp validation, public reads, image restrictions and administrator deletion. It requires Java 21 and downloads emulator binaries on first use. CI runs all three checks. [Previous detailed template guide (Turkish)](README.tr.md). [MIT license](LICENSE).
