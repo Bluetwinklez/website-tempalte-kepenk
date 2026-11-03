@@ -37,3 +37,7 @@ Main READMEs and new maintenance documents are English. Historical Turkish recor
 A service-business website template with Firebase administration, lead collection and tested access rules.
 
 The current GitHub integration rejected repository metadata edits with HTTP 403. This prepared description can be applied when repository administration access is available; it has not been represented as an applied settings change.
+
+## Dependency remediation follow-up
+
+Firebase tools 15.34.2 and explicit glob 14.0.3, minimatch 11.0.4, uuid 11.1.1 and OpenTelemetry core 2.8.0 overrides remove the remaining npm advisories. Three legacy callable-minimatch imports are adapted by a version-checked postinstall script. Packaging exclusion, hosting patterns, archive generation, telemetry loading and Firestore/Storage authorization tests cover compatibility. Future upgrades must review/remove the small compatibility patch; installation fails on unexpected consumer versions.
