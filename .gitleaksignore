@@ -1,0 +1,6 @@
+# Reviewed false positives only. See SECURITY_AUDIT.md for classification.
+f165e84a095d08c99bd83f421380c135a5eeb073:firestore.rules:generic-api-key:14
+f165e84a095d08c99bd83f421380c135a5eeb073:firestore.rules:generic-api-key:20
+f165e84a095d08c99bd83f421380c135a5eeb073:public/js/firebase-config.js:gcp-api-key:3
+f165e84a095d08c99bd83f421380c135a5eeb073:public/js/maint-gate.js:gcp-api-key:43
+f165e84a095d08c99bd83f421380c135a5eeb073:storage.rules:generic-api-key:8
