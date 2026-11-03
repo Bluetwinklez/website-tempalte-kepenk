@@ -72,3 +72,7 @@ The Node toolchain is development-only. A scoped override updates the Firestore 
 `npm run check` checks administration scripts; `npm test` verifies claim handling for anonymous users, ordinary users, malformed claims, token failures and administrators. `npm run test:rules` starts isolated Firestore/Storage emulators under the demo project and tests server authorization, forged lead fields, timestamp validation, public reads, image restrictions and administrator deletion. It requires Java 21 and downloads emulator binaries on first use. CI runs all three checks. [Previous detailed template guide (Turkish)](README.tr.md). [MIT license](LICENSE).
 
 [Security policy](SECURITY.md) · [Repository security audit](SECURITY_AUDIT.md)
+
+### Patched development dependencies
+
+`npm ci` applies a small, version-checked compatibility patch for the named export in minimatch 11. The dependency overrides address glob cancellation, minimatch amplification, UUID buffer bounds and OpenTelemetry baggage allocation advisories. Run `npm test`, `npm run check` and `npm run test:rules` when upgrading these tools. Review `scripts/patch-minimatch-consumers.cjs` before changing Firebase Tools or Superstatic; unexpected versions fail installation instead of silently skipping the patch.
